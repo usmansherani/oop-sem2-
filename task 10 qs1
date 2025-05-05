@@ -1,0 +1,105 @@
+
+interface Display {
+    void show();
+}
+
+// Interface Aircraft extending Display
+interface Aircraft extends Display {
+    String aircraftType();
+    int calculateCapacity();
+}
+
+// Class PassengerJet implementing Aircraft
+class PassengerJet implements Aircraft {
+    private int rows;
+    private int seatsPerRow;
+
+    public PassengerJet(int rows, int seatsPerRow) {
+        this.rows = rows;
+        this.seatsPerRow = seatsPerRow;
+    }
+
+    @Override
+    public String aircraftType() {
+        return "Passenger Jet";
+    }
+
+    @Override
+    public int calculateCapacity() {
+        return rows * seatsPerRow;
+    }
+
+    @Override
+    public void show() {
+        System.out.println("Type: " + aircraftType());
+        System.out.println("Capacity: " + calculateCapacity() + " passengers");
+    }
+}
+
+// Class CargoPlane implementing Aircraft
+class CargoPlane implements Aircraft {
+    private double length;
+    private double width;
+
+    public CargoPlane(double length, double width) {
+        this.length = length;
+        this.width = width;
+    }
+
+    @Override
+    public String aircraftType() {
+        return "Cargo Plane";
+    }
+
+    @Override
+    public int calculateCapacity() {
+        // Assuming 1 square meter can carry 100 kg, and we consider 1 kg as 1 unit of capacity
+        return (int) (length * width * 100);
+    }
+
+    @Override
+    public void show() {
+        System.out.println("Type: " + aircraftType());
+        System.out.println("Capacity: " + calculateCapacity() + " kg equivalent");
+    }
+}
+
+// Class PrivateJet implementing Aircraft
+class PrivateJet implements Aircraft {
+    private int seats;
+
+    public PrivateJet(int seats) {
+        this.seats = seats;
+    }
+
+    @Override
+    public String aircraftType() {
+        return "Private Jet";
+    }
+
+    @Override
+    public int calculateCapacity() {
+        return seats;
+    }
+
+    @Override
+    public void show() {
+        System.out.println("Type: " + aircraftType());
+        System.out.println("Capacity: " + calculateCapacity() + " luxury seats");
+    }
+}
+
+// Main class to test the implementation
+public class AirlineManagement {
+    public static void main(String[] args) {
+        Aircraft passengerJet = new PassengerJet(10, 4);
+        Aircraft cargoPlane = new CargoPlane(20, 15);
+        Aircraft privateJet = new PrivateJet(6);
+
+        passengerJet.show();
+        System.out.println();
+        cargoPlane.show();
+        System.out.println();
+        privateJet.show();
+    }
+}
