@@ -1,0 +1,54 @@
+
+abstract class VisitorPass {
+    abstract int calculateTicketPrice(int numberOfVisitors);
+}
+
+
+class VIPPass extends VisitorPass {
+    private static final int VIP_TICKET_PRICE = 100; 
+
+    @Override
+    int calculateTicketPrice(int numberOfVisitors) {
+        return numberOfVisitors * VIP_TICKET_PRICE;
+    }
+}
+
+
+class FamilyPass extends VisitorPass {
+    private static final int FAMILY_TICKET_PRICE = 80; 
+
+    @Override
+    int calculateTicketPrice(int numberOfVisitors) {
+        
+        int familyGroups = numberOfVisitors / 4;
+        int remainingVisitors = numberOfVisitors % 4;
+        return (familyGroups * FAMILY_TICKET_PRICE) + (remainingVisitors * 50); 
+    }
+}
+
+
+class GeneralPass extends VisitorPass {
+    private static final int GENERAL_TICKET_PRICE = 50; 
+
+    @Override
+    int calculateTicketPrice(int numberOfVisitors) {
+        return numberOfVisitors * GENERAL_TICKET_PRICE;
+    }
+}
+
+
+public class VisitorPassSystem {
+    public static void main(String[] args) {
+        VisitorPass vipPass = new VIPPass();
+        VisitorPass familyPass = new FamilyPass();
+        VisitorPass generalPass = new GeneralPass();
+
+        int numberOfVIPs = 3;
+        int numberOfFamilies = 10; 
+        int numberOfGenerals = 5;
+
+        System.out.println("Total ticket price for VIP visitors: $" + vipPass.calculateTicketPrice(numberOfVIPs));
+        System.out.println("Total ticket price for Family visitors: $" + familyPass.calculateTicketPrice(numberOfFamilies));
+        System.out.println("Total ticket price for General visitors: $" + generalPass.calculateTicketPrice(numberOfGenerals));
+    }
+}
