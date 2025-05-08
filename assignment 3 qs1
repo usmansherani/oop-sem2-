@@ -1,0 +1,83 @@
+abstract class Vehicel {
+    protected String vehicleNum;
+    protected String modle;
+    protected int builtYear;
+    protected double capcity;
+
+    public Vehicel(String vNum, String mdl, int yr, double cap) {
+        this.vehicleNum = vNum;
+        this.modle = mdl;
+        this.builtYear = yr;
+        this.capcity = cap;
+    }
+
+    public void displayInfo() {
+        System.out.println("Vehicle No: " + vehicleNum);
+        System.out.println("Model: " + modle);
+        System.out.println("Year: " + builtYear);
+        System.out.println("Capacity: " + capcity + " kg");
+    }
+
+    public abstract double calculateFuelEff();
+}
+
+class Truck extends Vehicel {
+    private double avgFuelConsump;
+
+    public Truck(String vNum, String mdl, int yr, double cap, double fuelCons) {
+        super(vNum, mdl, yr, cap);
+        this.avgFuelConsump = fuelCons;
+    }
+
+    @Override
+    public double calculateFuelEff() {
+        return capcity / avgFuelConsump;
+    }
+}
+
+class Van extends Vehicel {
+    private double cityMileage;
+    private double hwyMileage;
+
+    public Van(String vNum, String mdl, int yr, double cap, double cityM, double hwyM) {
+        super(vNum, mdl, yr, cap);
+        this.cityMileage = cityM;
+        this.hwyMileage = hwyM;
+    }
+
+    @Override
+    public double calculateFuelEff() {
+        return (cityMileage + hwyMileage) / 2;
+    }
+}
+
+class Motorcycle extends Vehicel {
+    private double kmPerLiter;
+
+    public Motorcycle(String vNum, String mdl, int yr, double cap, double kpl) {
+        super(vNum, mdl, yr, cap);
+        this.kmPerLiter = kpl;
+    }
+
+    @Override
+    public double calculateFuelEff() {
+        return kmPerLiter * 1.5; // bikes get bonus efficiency
+    }
+}
+
+public class TransPortSystem {
+    public static void main(String[] args) {
+        Truck t = new Truck("TRK123", "Ford F150", 2020, 5000, 8.5);
+        Van v = new Van("VAN456", "Mercedes Sprinter", 2021, 2000, 12.5, 15.3);
+        Motorcycle m = new Motorcycle("MOTO789", "Honda CB500", 2022, 150, 25.0);
+
+        t.displayInfo();
+        System.out.println("Fuel Efficiency: " + t.calculateFuelEff() + " km/kg");
+
+        v.displayInfo();
+        System.out.println("Fuel Efficiency: " + v.calculateFuelEff() + " km/l");
+
+        m.displayInfo();
+        System.out.println("Fuel Efficiency: " + m.calculateFuelEff() + " km/l");
+    }
+}
