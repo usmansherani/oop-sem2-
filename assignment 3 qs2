@@ -1,0 +1,84 @@
+interface PaymentMethod {
+    boolean authenticate();
+    boolean processPayment(double amount);
+}
+
+class CreditCard implements PaymentMethod {
+    private String cardNum;
+    private String expiry;
+
+    public CreditCard(String num, String exp) {
+        this.cardNum = num;
+        this.expiry = exp;
+    }
+
+    @Override
+    public boolean authenticate() {
+        return cardNum.length() == 16;
+    }
+
+    @Override
+    public boolean processPayment(double amt) {
+        System.out.println("Processing $" + amt + " via Credit Card");
+        return true;
+    }
+}
+
+class PayPal implements PaymentMethod {
+    private String email;
+
+    public PayPal(String eml) {
+        this.email = eml;
+    }
+
+    @Override
+    public boolean authenticate() {
+        return email.contains("@");
+    }
+
+    @Override
+    public boolean processPayment(double amt) {
+        System.out.println("Processing $" + amt + " via PayPal");
+        return true;
+    }
+}
+
+class Crypto implements PaymentMethod {
+    private String walletAddr;
+
+    public Crypto(String addr) {
+        this.walletAddr = addr;
+    }
+
+    @Override
+    public boolean authenticate() {
+        return walletAddr.length() > 20;
+    }
+
+    @Override
+    public boolean processPayment(double amt) {
+        System.out.println("Processing $" + amt + " via Crypto");
+        return true;
+    }
+}
+
+public class EcomPaymentSystem {
+    public static void main(String[] args) {
+        PaymentMethod cc = new CreditCard("4111111111111111", "12/25");
+        PaymentMethod pp = new PayPal("user@example.com");
+        PaymentMethod btc = new Crypto("1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa");
+
+        makePayment(cc, 100.50);
+        makePayment(pp, 100.50);
+        makePayment(btc, 100.50);
+    }
+
+    static void makePayment(PaymentMethod pm, double amt) {
+        if (pm.authenticate()) {
+            boolean success = pm.processPayment(amt);
+            System.out.println("Payment " + (success ? "successful" : "failed"));
+        } else {
+            System.out.println("Authentication failed!");
+        }
+    }
+}
