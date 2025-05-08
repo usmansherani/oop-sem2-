@@ -1,0 +1,54 @@
+import java.util.Scanner;
+
+class Divison {
+    private int Num1;
+    private int Num2;
+
+    public int getNum1() {
+        return Num1;
+    }
+
+    public void setNum1(int n) {
+        this.Num1 = n;
+    }
+
+    public int getNum2() {
+        return Num2;
+    }
+
+    public void setNum2(int n) {
+        this.Num2 = n;
+    }
+}
+
+public class MainClas {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Divison d = new Divison();
+
+        System.out.println("Enter first number (start with 10):");
+        int firstNum = sc.nextInt();
+        d.setNum1(firstNum);
+
+        System.out.println("Enter second number (start with 9):");
+        int secondNum = sc.nextInt();
+        d.setNum2(secondNum);
+
+        while (d.getNum2() >= 0) {
+            try {
+                int result = d.getNum1() / d.getNum2();
+                System.out.println(d.getNum1() + " / " + d.getNum2() + " = " + result);
+            } catch (ArithmeticException e) {
+                System.out.println("Cannot divide by zero!");
+            }
+
+            System.out.println("Enter next first number:");
+            d.setNum1(sc.nextInt());
+
+            System.out.println("Enter next second number:");
+            d.setNum2(sc.nextInt());
+        }
+
+        sc.close();
+    }
+}
