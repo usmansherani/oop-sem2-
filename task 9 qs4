@@ -1,0 +1,42 @@
+abstract class Seat {
+    public abstract int Calculate_Seat_Price(int nofseats);
+}
+
+class Business_Class extends Seat {
+    private int price = 5000;
+
+    @Override
+    public int Calculate_Seat_Price(int nofseats) {
+        return nofseats * price;
+    }
+}
+
+class First_Class extends Seat {
+    private int price = 3000;
+
+    @Override
+    public int Calculate_Seat_Price(int nofseats) {
+        return nofseats * price;
+    }
+}
+
+class Economy_Class extends Seat {
+    private int price = 1000;
+
+    @Override
+    public int Calculate_Seat_Price(int nofseats) {
+        return nofseats * price;
+    }
+}
+
+public class AirlineTickets {
+    public static void main(String[] args) {
+        Business_Class bc = new Business_Class();
+        First_Class fc = new First_Class();
+        Economy_Class ec = new Economy_Class();
+
+        System.out.println("Business class for 3 seats: PKR" + bc.Calculate_Seat_Price(3));
+        System.out.println("First class for 5 seats: PKR" + fc.Calculate_Seat_Price(5));
+        System.out.println("Economy class for 10 seats: PKR" + ec.Calculate_Seat_Price(10));
+    }
+}
