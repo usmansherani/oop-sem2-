@@ -1,0 +1,100 @@
+interface Draw {
+    void drow();
+}
+
+interface Shape extends Draw {
+    void shapeType();
+    void calculateArea();
+}
+
+class Rectangle implements Shape {
+    private int lenght;
+    private int width;
+
+    public Rectangle(int l, int w) {
+        this.lenght = l;
+        this.width = w;
+    }
+
+    @Override
+    public void drow() {
+        System.out.println("Drawing rectangl...");
+    }
+
+    @Override
+    public void shapeType() {
+        System.out.println("Type: Rectangl");
+    }
+
+    @Override
+    public void calculateArea() {
+        System.out.println("Area: " + (lenght * width));
+    }
+}
+
+class Circle implements Shape {
+    private int radious;
+    private final double PI = 3.1416;
+
+    public Circle(int r) {
+        this.radious = r;
+    }
+
+    @Override
+    public void drow() {
+        System.out.println("Drawing circl...");
+    }
+
+    @Override
+    public void shapeType() {
+        System.out.println("Type: Circle");
+    }
+
+    @Override
+    public void calculateArea() {
+        System.out.println("Area: " + (PI * radious * radious));
+    }
+}
+
+class Square implements Shape {
+    private int side;
+
+    public Square(int s) {
+        this.side = s;
+    }
+
+    @Override
+    public void drow() {
+        System.out.println("Drawing square...");
+    }
+
+    @Override
+    public void shapeType() {
+        System.out.println("Type: Squre");
+    }
+
+    @Override
+    public void calculateArea() {
+        System.out.println("Area: " + (side * side));
+    }
+}
+
+public class MainShapes {
+    public static void main(String[] args) {
+        Rectangle r = new Rectangle(5, 10);
+        Circle c = new Circle(7);
+        Square s = new Square(4);
+
+        r.drow();
+        r.shapeType();
+        r.calculateArea();
+
+        c.drow();
+        c.shapeType();
+        c.calculateArea();
+
+        s.drow();
+        s.shapeType();
+        s.calculateArea();
+    }
+}
