@@ -1,0 +1,54 @@
+abstract class Bank {
+    public abstract int getBalannce();
+}
+
+class BankA extends Bank {
+    private int bal;
+
+    public BankA() {
+        this.bal = 100000;
+    }
+
+    @Override
+    public int getBalannce() {
+        return bal;
+    }
+}
+
+class BankB extends Bank {
+    private int bal;
+
+    public BankB() {
+        this.bal = 150000;
+    }
+
+    @Override
+    public int getBalannce() {
+        return bal;
+    }
+}
+
+class BankC extends Bank {
+    private int blance;
+
+    public BankC() {
+        this.blance = 200000;
+    }
+
+    @Override
+    public int getBalannce() {
+        return blance;
+    }
+}
+
+public class MainClas {
+    public static void main(String[] args) {
+        BankA a = new BankA();
+        BankB b = new BankB();
+        BankC c = new BankC();
+
+        System.out.println("Bank A has: PKR" + a.getBalannce());
+        System.out.println("Bank B has: PKR" + b.getBalannce());
+        System.out.println("Bank C has: PKR" + c.getBalannce());
+    }
+}
